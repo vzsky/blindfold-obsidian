@@ -17,7 +17,7 @@ const render = (el: HTMLDivElement, text: string) => {
   })
 }
 
-export default class SpoilerBlock extends Plugin {
+export default class BlindFoldBlock extends Plugin {
   async onload() {
 
     await loadMathJax();

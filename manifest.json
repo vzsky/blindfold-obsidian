@@ -1,11 +1,11 @@
 {
-	"id": "obsidian-sample-plugin",
-	"name": "Sample Plugin",
+	"id": "blindfold-obsidian",
+	"name": "BlindFold",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "blindfold allows folding text by making it complete hidden.",
+	"author": "my99n",
+	"authorUrl": "https://my99n.now.sh",
+	"fundingUrl": "https://my99n.now.sh",
 	"isDesktopOnly": false
 }
