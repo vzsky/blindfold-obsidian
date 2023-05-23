@@ -1,8 +1,8 @@
-/*
+.blindfold-blind {
+  display: none;
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.blindfold-show {
+  display: block;
+}
 
-If your plugin does not need CSS, delete this file.
-
-*/
