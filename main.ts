@@ -1,53 +1,54 @@
-import { Plugin, renderMath, loadMathJax, Notice, finishRenderMath } from 'obsidian';
+import { Plugin, MarkdownRenderer, loadMathJax, MarkdownPostProcessorContext } from 'obsidian';
+import { BlindFoldSettingTab } from 'settings';
 
-const render = (el: HTMLDivElement, text: string) => {
-  text.split('$$').forEach((val, ind) => {
-    let block = el.createEl("div")
-    if (ind % 2 == 0) {
-      val.split('$').forEach((val, ind) => {
-        let word = block.createEl("span", { text: val })
-        if (ind % 2 == 1) {
-          word.replaceWith(renderMath(val, false)) 
-        }
-      })
+const BlindFoldCodeProcessor = (self: BlindFoldPlugin) => (source:string, el:HTMLElement, ctx:MarkdownPostProcessorContext) => {
+  const button = el.createEl("button");
+  button.innerHTML = self.settings.openText; 
+  button.addEventListener("click", () => {
+    if (container.className === 'blindfold-blind') {
+      container.className = "blindfold-show"
+      button.innerHTML = self.settings.closeText
     }
-    if (ind % 2 == 1) {
-      block.replaceWith(renderMath(val, true))
+    else {
+      container.className = 'blindfold-blind'
+      button.innerHTML = self.settings.openText
     }
   })
+
+  const container = el.createDiv();
+  container.className = "blindfold-blind";
+
+  let rowEl = container.createDiv()
+  MarkdownRenderer.renderMarkdown(source, rowEl, ctx.sourcePath, self)
 }
 
-export default class BlindFoldBlock extends Plugin {
+interface BlindFoldSettings {
+  openText: string,
+  closeText: string
+}
+
+const DEFAULT_SETTINGS: BlindFoldSettings = {
+  openText: "click here to reveal...",
+  closeText: "Close"
+}
+
+export default class BlindFoldPlugin extends Plugin {
+  settings: BlindFoldSettings
+
   async onload() {
-
+    await this.loadSettings();
     await loadMathJax();
+    this.registerMarkdownCodeBlockProcessor("blindfold", BlindFoldCodeProcessor(this))
+    this.addSettingTab(new BlindFoldSettingTab(this.app, this))
+  }
 
-    this.registerMarkdownCodeBlockProcessor("blindfold", (source, el, _) => {
+  onunload() { }
 
-      const button = el.createEl("button");
-      button.innerHTML = "click here to reveal..."; 
-      button.addEventListener("click", () => {
-        if (container.className === 'blindfold-blind') {
-          container.className = "blindfold-show"
-          button.innerHTML = "close"
-        }
-        else {
-          container.className = 'blindfold-blind'
-          button.innerHTML = "click here to reveal..."
-        }
-      })
+  async loadSettings() {
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData())
+  }
 
-      const container = el.createEl("div");
-      container.className = "blindfold-blind";
-      
-      const rows = source.split("\n");
-      for (let row of rows) {
-        let rowEl = container.createEl("div")
-        render(rowEl, row)
-      }
-
-      finishRenderMath();
-      
-    });
+  async saveSettings() {
+    await this.saveData(this.settings)
   }
 }
