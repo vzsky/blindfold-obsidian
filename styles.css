@@ -1,8 +1,9 @@
-.blindfold-blind {
-  display: none;
-}
-
-.blindfold-show {
+.blindfold {
   display: block;
 }
-
+.btn {
+  display: block;
+}
+.blind {
+  display: none;
+}

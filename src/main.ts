@@ -1,22 +1,22 @@
 import { Plugin, MarkdownRenderer, loadMathJax, MarkdownPostProcessorContext } from 'obsidian';
-import { BlindFoldSettingTab } from 'settings';
+import { BlindFoldSettingTab } from './settings';
 
 const BlindFoldCodeProcessor = (self: BlindFoldPlugin) => (source:string, el:HTMLElement, ctx:MarkdownPostProcessorContext) => {
-  const button = el.createEl("button");
-  button.innerHTML = self.settings.openText; 
-  button.addEventListener("click", () => {
-    if (container.className === 'blindfold-blind') {
-      container.className = "blindfold-show"
-      button.innerHTML = self.settings.closeText
-    }
-    else {
-      container.className = 'blindfold-blind'
-      button.innerHTML = self.settings.openText
-    }
+  const closebutton = el.createEl("button", {text: self.settings.closeText, cls: ["btn", "blind"]});
+  const openbutton = el.createEl("button", {text: self.settings.openText, cls: "btn"})
+  closebutton.addEventListener("click", () => {
+    container.toggleClass("blind", true) 
+    closebutton.toggleClass("blind", true)
+    openbutton.toggleClass("blind", false)
+  })
+  openbutton.addEventListener("click", () => {
+    container.toggleClass("blind", false) 
+    closebutton.toggleClass("blind", false)
+    openbutton.toggleClass("blind", true)
   })
 
   const container = el.createDiv();
-  container.className = "blindfold-blind";
+  container.toggleClass(["blindfold", "blind"], true);
 
   let rowEl = container.createDiv()
   MarkdownRenderer.renderMarkdown(source, rowEl, ctx.sourcePath, self)
