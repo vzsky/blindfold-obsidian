@@ -14,10 +14,10 @@ export class BlindFoldSettingTab extends PluginSettingTab {
     containerEl.empty()
 
     new Setting(containerEl)
-      .setName("Open Text")
+      .setName("Open text")
       .setDesc("a text displayed on the button to open the fold")
       .addText((text) => text
-        .setPlaceholder("click here to reveal...")
+        .setPlaceholder("Reveal")
         .setValue(this.plugin.settings.openText)
         .onChange(async (value) => {
           this.plugin.settings.openText = value 
@@ -26,10 +26,10 @@ export class BlindFoldSettingTab extends PluginSettingTab {
       )
 
     new Setting(containerEl)
-      .setName("Close Text")
+      .setName("Close text")
       .setDesc("a text displayed on the button to close the fold")
       .addText((text) => text
-        .setPlaceholder("click here to close...")
+        .setPlaceholder("Close")
         .setValue(this.plugin.settings.closeText)
         .onChange(async (value) => {
           this.plugin.settings.closeText = value 

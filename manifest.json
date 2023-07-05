@@ -3,7 +3,7 @@
 	"name": "BlindFold",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "blindfold allows folding text by making it complete hidden.",
+	"description": "Fold text by making it completely hidden.",
 	"author": "my99n",
 	"authorUrl": "https://my99n.now.sh",
 	"isDesktopOnly": false

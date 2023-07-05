@@ -1,7 +1,7 @@
 {
 	"name": "blindfold-obsidian",
 	"version": "1.0.0",
-	"description": "blindfold allows folding text by making it complete hidden.",
+	"description": "Fold text by making it completely hidden.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
