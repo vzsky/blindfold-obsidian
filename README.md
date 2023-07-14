@@ -5,6 +5,9 @@
 Blindfold aims to blind unneccessary parts of text away from the main screen by putting it in a *normally folded* section. 
 The text could be toggle up using a button. I intend to use this to hide away ugly mathematic proofs, so this support latex.
 
+# Installation 
+Now, installable via the community plugin tab
+
 # Blindfold In action
 This is blindfold normally. The buttons "click to reveal.." works as you might think. Click, to reveal.
 <img width="791" alt="Screenshot 2566-05-23 at 23 14 58" src="https://github.com/vzsky/blindfold-obsidian/assets/20735983/79114afd-5df3-4cc2-b097-e29a63ef8363">
