@@ -36,5 +36,16 @@ export class BlindFoldSettingTab extends PluginSettingTab {
           await this.plugin.saveSettings()
         })
       )
+
+    new Setting(containerEl)
+      .setName("Enable inline spoiler")
+      .setDesc("enabling |% inline spoiler %|")
+      .addToggle((text) => text
+        .setValue(this.plugin.settings.enableSpoiler)
+        .onChange(async (value) => {
+          this.plugin.settings.enableSpoiler = value 
+          await this.plugin.saveSettings()
+        })
+      )
   }
 }
