@@ -18,9 +18,7 @@ import { RangeSetBuilder } from "@codemirror/state";
 
 const BlindFoldCodeProcessor = (self: BlindFoldPlugin) => (source:string, el:HTMLElement, ctx:MarkdownPostProcessorContext) => {
 
-  const codeblockArg = ctx.getSectionInfo(el)?.text.split('\n')[0].trim().split(' ').slice(1).join(' ')
-
-  const openText = codeblockArg ?? self.settings.openText
+  const openText = self.settings.openText 
   const closeText = self.settings.closeText
 
   const closebutton = el.createEl("button", {text: closeText, cls: ["btn", "blind"]});
@@ -40,6 +38,7 @@ const BlindFoldCodeProcessor = (self: BlindFoldPlugin) => (source:string, el:HTM
   container.toggleClass(["blindfold", "blind"], true);
 
   let rowEl = container.createDiv()
+
   MarkdownRenderer.renderMarkdown(source, rowEl, ctx.sourcePath, self)
 }
 
